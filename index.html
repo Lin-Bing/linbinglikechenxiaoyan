@@ -14,8 +14,14 @@
             justify-content: center;
             align-items: center;
         }
-        .loading {
+
+
+        .loadingbg {
             background: white; 
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 500px;
         }
         .loading img{
             animation: loading 2s linear;
@@ -26,7 +32,7 @@
         }
 
         .maincontent {
-            display: none;
+            visibility: hidden;
         }
         .titlebg {
             background-color: rgba(245, 245, 245);
@@ -77,6 +83,9 @@
             background-color:rgba(208, 224, 236, 1);
         }
         input {
+            background-color:rgba(74, 114, 221, 1);
+            background:rgba(74, 114, 221, 1);
+            color:rgba(74, 114, 221, 1);
             padding-bottom: 10px;
             margin-bottom: 5px;
         }
@@ -92,6 +101,7 @@
             text-align: center;
             font-weight: bolder;
         }
+
 
         .dialog {
             position: absolute; top:0; left: 0; width: 100%; height: 100%; 
@@ -134,11 +144,34 @@
             width: 20px;
             height: 20px;
         }
-        
+
+        .noselect {
+            position: absolute; top:0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.4); 
+            justify-content: center; align-items: center;
+        }
+        .tipsContent {
+            background-color: white;
+            border-radius: 5px;
+            width: 240px;
+            height: 50px;
+            color: #666666;
+            font-weight: bolder;
+            font-size: 12px;
+            line-height: 50px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    
+ 
+<div class="loadingbg" style="display:flex">
+    <div class="loading">
+        <img src="loading.png"/>
+    </div>
+</div>
+
+
 <div class="maincontent">
     <div class="titlebg">
         <div class="title" >文字文字文字文字文</div>
@@ -146,20 +179,18 @@
     </div>
     
     <div class="selectbg">
-        <div class="question">
-            文字文字文字文字文文字文字文
-        </div>
-        <div class="divider">
+        <div class="question">文字文字文字文字文文字文字文</div>
+        <div class="divider"></div>
     </div>
 
     <div>
-        <div class="answer"><input class="yuan" name="a" type="radio"/> A 答案答案</div>
+        <div class="answer"><input class="A" name="cbox" type="checkbox"/> A 答案答案</div>
         <div class="divider2"></div>
-        <div class="answer"><input class="yuan" name="a" type="radio"/> B 答案答案</div>
+        <div class="answer"><input class="B" name="cbox" type="checkbox"/> B 答案答案</div>
         <div class="divider2"></div>
-        <div class="answer"><input class="yuan" name="a" type="radio"/> C 答案答案</div>
+        <div class="answer"><input class="C" name="cbox" type="checkbox"/> C 答案答案</div>
         <div class="divider2"></div>
-        <div class="answer"><input class="yuan" name="a" type="radio"/> D 答案答案</div>
+        <div class="answer"><input class="D" name="cbox" type="checkbox"/> D 答案答案</div>
     </div>
 
     <div class="submit" onclick="submitFunc()">提交<div>
@@ -194,18 +225,34 @@
     </div>
 </div>
 
-<div class="loading" style="display:flex">
-    <img src="loading.png"/>
+
+<div class="noselect" style="display:none">
+    <div class="tipsContent">
+        请选择您最心仪的答案！！！
+    </div>
 </div>
 
 
 <script>
     function submitFunc() {
-        document.querySelector(".dialog").style.display='flex';
+        var arr = document.getElementsByName('cbox')
+        for (let index = 0; index < arr.length; index++) {
+            const element = arr[index];
+            if (element.checked) {
+                document.querySelector(".dialog").style.display='flex';
+                return;
+            }
+        }
+
+        document.querySelector(".noselect").style.display='flex';
+        setTimeout(() => {
+            document.querySelector(".noselect").style.display='none';
+        }, 1400);
     }
+    
     setTimeout(() => {
-        document.querySelector(".loading").style.display='none';
-        document.querySelector(".maincontent").style.display='inline';
+        document.querySelector(".loadingbg").style.display='none';
+        document.querySelector(".maincontent").style.visibility='visible';
     }, 2000);
 </script>
 

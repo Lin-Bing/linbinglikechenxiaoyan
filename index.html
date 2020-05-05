@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+
+    <style>
+        a, address, b, big, blockquote, body, center, cite, code, dd, del, div, dl, dt, em, fieldset, font, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, label, legend, li, ol, p, pre, small, span, strong, u, ul, var{
+            padding: 0px;
+            margin: 0px;
+        }
+        body {
+            justify-content: center;
+            align-items: center;
+        }
+        .loading {
+            background: white; 
+        }
+        .loading img{
+            animation: loading 2s linear;
+        }
+        @keyframes loading {
+            0%{transform: rotate(0);}
+            100%{transform: rotate(720deg);}
+        }
+
+        .maincontent {
+            display: none;
+        }
+        .titlebg {
+            background-color: rgba(245, 245, 245);
+            width: 100%;
+            height: 150px;
+            box-shadow: 0 0 5px #ddd;
+        }
+        .title {
+            text-align: left;
+            padding-left: 30px;
+            padding-top: 50px;
+            padding-bottom: 10px;
+            color: rgba(50, 50, 50, 1);
+            font-weight: bolder;
+            font-size: 25px;
+        }
+        .titleline {
+            background-color: rgba(99, 146, 229);
+            margin-left: 30px;
+            width: 100px;
+            height: 3px;
+        }
+        .selectbg {
+            background:white;
+        }
+        .question {
+            line-height: 50px;
+            padding-left: 20px;
+            color: #666666;
+            font-weight: bolder;
+            font-size: 15px;
+        }
+        .divider {
+            height: 1px;
+            overflow: hidden;
+            background-color:rgba(208, 224, 236, 1);
+        }
+        .answer {
+            padding-left: 20px;
+            height: 40px;
+            line-height: 40px;
+            color: rgba(10, 10, 10, 1);
+        }
+        .divider2 {
+            margin-left: 20px;
+            height: 0.5px;
+            overflow: hidden;
+            background-color:rgba(208, 224, 236, 1);
+        }
+        input {
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+        .submit {
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 50px;
+            background-color:rgba(74, 114, 221, 1);
+            border-radius: 6px;
+            color:white;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bolder;
+        }
+
+        .dialog {
+            position: absolute; top:0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.4); 
+            justify-content: center; align-items: center;
+        }
+        .content {
+            background:white;
+            width: 300px;
+            height: 400px;
+            border-radius: 6px;
+        }
+        .reslut {
+            padding-top: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 40px;
+            color: #666666;
+            font-weight: bolder;
+            font-size: 15px;
+            line-height: normal;
+            text-align: left;
+        }
+        .imgBg {
+            width: 300px;
+            height: 60px;
+            display: flex;
+            justify-content: center; align-items: center;
+        }
+        .iconbg {
+            justify-content: center; align-items: center;
+            margin: 10px;
+            padding-top: 4px;
+            width: 40px;
+            height: 36px;
+            border: 1px solid #B2B2B2;
+            border-radius: 2px;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+<div class="maincontent">
+    <div class="titlebg">
+        <div class="title" >文字文字文字文字文</div>
+        <div class="titleline"></div>
+    </div>
+    
+    <div class="selectbg">
+        <div class="question">
+            文字文字文字文字文文字文字文
+        </div>
+        <div class="divider">
+    </div>
+
+    <div>
+        <div class="answer"><input class="yuan" name="a" type="radio"/> A 答案答案</div>
+        <div class="divider2"></div>
+        <div class="answer"><input class="yuan" name="a" type="radio"/> B 答案答案</div>
+        <div class="divider2"></div>
+        <div class="answer"><input class="yuan" name="a" type="radio"/> C 答案答案</div>
+        <div class="divider2"></div>
+        <div class="answer"><input class="yuan" name="a" type="radio"/> D 答案答案</div>
+    </div>
+
+    <div class="submit" onclick="submitFunc()">提交<div>
+</div>
+
+
+<div class="dialog" style="display:none">
+    <div class="content">
+        <div class="reslut">文字文字文字文字文文字文字文文字文字文字文字文文字</div>
+        <div class="imgBg">
+            <div class="iconbg">
+                <img class="icon" src="bun.png"/>
+            </div>
+            <div class="iconbg">
+                <img class="icon" src="eat.png"/>
+            </div>
+            <div class="iconbg">
+                <img class="icon" src="show.png"/>
+            </div>
+        </div>
+        <div class="imgBg">
+            <div class="iconbg">
+                <img class="icon" src="learn.png"/>
+            </div>
+            <div class="iconbg">
+                <img class="icon" src="sweet.png"/>
+            </div>
+            <div class="iconbg">
+                <img class="icon" src="tarvel.png"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading" style="display:flex">
+    <img src="loading.png"/>
+</div>
+
+
+<script>
+    function submitFunc() {
+        document.querySelector(".dialog").style.display='flex';
+    }
+    setTimeout(() => {
+        document.querySelector(".loading").style.display='none';
+        document.querySelector(".maincontent").style.display='inline';
+    }, 2000);
+</script>
+
+</body>
+</html>
+

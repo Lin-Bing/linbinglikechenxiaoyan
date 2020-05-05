@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>标题</title>
+    <title>我心里想的都是这些啊</title>
 
     <style>
         a, address, b, big, blockquote, body, center, cite, code, dd, del, div, dl, dt, em, fieldset, font, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, label, legend, li, ol, p, pre, small, span, strong, u, ul, var{
@@ -14,7 +14,6 @@
             justify-content: center;
             align-items: center;
         }
-
 
         .loadingbg {
             background: white; 
@@ -71,6 +70,8 @@
             background-color:rgba(208, 224, 236, 1);
         }
         .answer {
+            display: flex;
+            align-items: center;
             padding-left: 20px;
             height: 40px;
             line-height: 40px;
@@ -88,6 +89,22 @@
             color:rgba(74, 114, 221, 1);
             padding-bottom: 10px;
             margin-bottom: 5px;
+        }
+        .checkbg {
+            width: 14px;
+            height: 14px;
+            border-radius: 14px;
+            border: 2px solid #78A4Fa;
+            background-color:white;
+            justify-content: center;
+            align-items: center;
+        }
+        .checkimg {
+            width: 14px;
+            height: 14px;
+        }
+        .checkanswer {
+            margin-left: 6px;
         }
         .submit {
             margin-left: 80px;
@@ -174,23 +191,35 @@
 
 <div class="maincontent">
     <div class="titlebg">
-        <div class="title" >文字文字文字文字文</div>
+        <div class="title" >陈晓燕，我喜欢你😍</div>
         <div class="titleline"></div>
     </div>
     
     <div class="selectbg">
-        <div class="question">文字文字文字文字文文字文字文</div>
+        <div class="question">那么，你愿意成为我的女朋友吗？</div>
         <div class="divider"></div>
     </div>
 
     <div>
-        <div class="answer"><input class="A" name="cbox" type="checkbox"/> A 答案答案</div>
+        <div class="answer" onclick="onclickAnswer('A')">
+            <img class="checkimg" id="A" src="unselect.png"/>
+            <div class="checkanswer">A 愿意</div>
+        </div>
         <div class="divider2"></div>
-        <div class="answer"><input class="B" name="cbox" type="checkbox"/> B 答案答案</div>
+        <div class="answer" onclick="onclickAnswer('B')">
+            <img class="checkimg" id="B" src="unselect.png"/>
+            <div class="checkanswer">B 很愿意</div>
+        </div>
         <div class="divider2"></div>
-        <div class="answer"><input class="C" name="cbox" type="checkbox"/> C 答案答案</div>
+        <div class="answer" onclick="onclickAnswer('C')">
+            <img class="checkimg" id="C" src="unselect.png"/>
+            <div class="checkanswer">C 非常愿意</div>
+        </div>
         <div class="divider2"></div>
-        <div class="answer"><input class="D" name="cbox" type="checkbox"/> D 答案答案</div>
+        <div class="answer" onclick="onclickAnswer('D')">
+            <img class="checkimg" id="D" src="unselect.png"/>
+            <div class="checkanswer">D 超级无敌愿意</div>
+        </div>
     </div>
 
     <div class="submit" onclick="submitFunc()">提交<div>
@@ -199,7 +228,7 @@
 
 <div class="dialog" style="display:none">
     <div class="content">
-        <div class="reslut">文字文字文字文字文文字文字文文字文字文字文字文文字</div>
+        <div class="reslut">恭喜你成为林冰的女朋友...长长久久，不能反悔的那种！！！</div>
         <div class="imgBg">
             <div class="iconbg">
                 <img class="icon" src="bun.png"/>
@@ -213,13 +242,24 @@
         </div>
         <div class="imgBg">
             <div class="iconbg">
-                <img class="icon" src="learn.png"/>
+                <img class="icon" src="sport.png"/>
             </div>
             <div class="iconbg">
                 <img class="icon" src="sweet.png"/>
             </div>
             <div class="iconbg">
+                <img class="icon" src="learn.png"/>
+            </div>
+        </div>
+        <div class="imgBg">
+            <div class="iconbg">
                 <img class="icon" src="tarvel.png"/>
+            </div>
+            <div class="iconbg">
+                <img class="icon" src="sea.png"/>
+            </div>
+            <div class="iconbg">
+                <img class="icon" src="other.png"/>
             </div>
         </div>
     </div>
@@ -234,26 +274,49 @@
 
 
 <script>
+
+    const selectAnswer = {
+        A: false,
+        B: false,
+        C: false,
+        D: false,
+    }
+
+    setTimeout(() => {
+        document.querySelector(".loadingbg").style.display='none';
+        document.querySelector(".maincontent").style.visibility='visible';
+    }, 2000);
+
+
     function submitFunc() {
-        var arr = document.getElementsByName('cbox')
-        for (let index = 0; index < arr.length; index++) {
-            const element = arr[index];
-            if (element.checked) {
+        var isSelected = false;
+        Object.keys(selectAnswer).forEach(function(key){
+            if (selectAnswer[key]) {
                 document.querySelector(".dialog").style.display='flex';
+                isSelected = true;
                 return;
             }
-        }
+        });
 
+        if (isSelected) {
+            return;
+        }
         document.querySelector(".noselect").style.display='flex';
         setTimeout(() => {
             document.querySelector(".noselect").style.display='none';
         }, 1400);
     }
+
+    function onclickAnswer(params) {
+        var old = selectAnswer[params];
+        selectAnswer[params] = !old;
+        
+        document.getElementById('A').src = selectAnswer['A'] ? 'select.png' : 'unselect.png';
+        document.getElementById('B').src = selectAnswer['B'] ? 'select.png' : 'unselect.png';
+        document.getElementById('C').src = selectAnswer['C'] ? 'select.png' : 'unselect.png';
+        document.getElementById('D').src = selectAnswer['D'] ? 'select.png' : 'unselect.png';
+    }
     
-    setTimeout(() => {
-        document.querySelector(".loadingbg").style.display='none';
-        document.querySelector(".maincontent").style.visibility='visible';
-    }, 2000);
 </script>
 
 </body>
